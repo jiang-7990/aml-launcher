@@ -1,5 +1,9 @@
 # AML · 移动存储设备游戏存档管理启动器
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6.svg)](#)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1-5391FE.svg)](#)
+
 把游戏装进 U 盘或移动硬盘，存档跟着盘走。插到任意一台 Windows 电脑，双击启动器就能玩；游戏照常读写本机存档路径，实际数据始终留在盘里，换电脑、换盘符都不丢。
 
 当前版本：**v0.18.0**（单文件 `AML.exe` + 自定义壁纸/透明度 + 无边框界面）
