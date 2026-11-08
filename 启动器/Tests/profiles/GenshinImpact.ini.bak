@@ -1,0 +1,8 @@
+﻿[game]
+name=Genshin Impact
+exe=Genshin Impact Game\YuanShen.exe
+launcher=
+launcher_args=
+wait=process
+dir=E:\Program Files\Genshin Impact
+

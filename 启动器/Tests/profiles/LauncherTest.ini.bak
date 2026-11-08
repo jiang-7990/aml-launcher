@@ -1,0 +1,9 @@
+﻿[game]
+name=启动器测试
+exe=Game\LTGame.exe
+launcher=Start.exe
+wait=process
+[mapping.1]
+kind=dir
+local=%APPDATA%\LauncherTest
+store=appdata

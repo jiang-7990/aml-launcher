@@ -1,0 +1,19 @@
+# 运行时数据（游戏、存档、备份、日志、状态）
+启动器/Games/
+启动器/Data/
+启动器/Backups/
+启动器/Snapshots/
+启动器/Logs/
+启动器/Launcher/state/
+启动器/Launcher/.runtime/
+启动器/Launcher/icons/*.png
+启动器/Launcher/wallpaper.*
+启动器/dist/
+启动器/AML.exe
+启动器/Tests/_removed-*.zip
+启动器/Tests/_tmp-*.ps1
+启动器/Tests/*.zip
+
+# 临时
+.scratch/
+*.log

@@ -1,0 +1,7 @@
+﻿这里是开发期的冒烟测试素材，不参与正式游戏列表。
+
+用法：把 Games 下的测试游戏文件夹复制回 ..\Games\，把 profiles 下的 ini 复制回 ..\Launcher\profiles\，即可重新跑回归测试。
+- FakeGame / FakeGame2：验证联接、复制、版本隔离（存档写 %APPDATA%\FakeGame\save.dat）
+- WaitTest：验证 wait=tree（wrapper 起子进程后自己退出）
+- NameTest：验证 wait=name:fakegame.exe（wrapper 起 FakeGame 后自己退出）
+- LearnTest：验证学习模式（写 %APPDATA%\LearnTest\saves\slot1.sav，另写 settings.ini 与 logs/cache 噪音）
