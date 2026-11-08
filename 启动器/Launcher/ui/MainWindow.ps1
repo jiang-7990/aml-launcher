@@ -953,10 +953,24 @@ using System.Runtime.InteropServices;
 public static class PglWin {
     [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
     [DllImport("dwmapi.dll")] public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
+    [DllImport("user32.dll")] public static extern bool ReleaseCapture();
+    [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr h, int msg, IntPtr w, IntPtr l);
+    public static void DragMove(IntPtr hwnd) { ReleaseCapture(); SendMessage(hwnd, 0xA1, (IntPtr)2, IntPtr.Zero); }
 }
 '@
     }
-    [void][PglWin]::SetProcessDPIAware()
+    if (-not ('PglDrag' -as [type])) {
+        Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+public static class PglDrag {
+    [DllImport("user32.dll")] public static extern bool ReleaseCapture();
+    [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr h, int msg, IntPtr w, IntPtr l);
+    public static void DragMove(IntPtr hwnd) { ReleaseCapture(); SendMessage(hwnd, 0xA1, (IntPtr)2, IntPtr.Zero); }
+}
+'@
+    }
+    try { [void][PglWin]::SetProcessDPIAware() } catch { }
     $script:Games = @($Games)
     $script:Config = $Config
     if ($Config) { $global:Config = $Config }
@@ -1065,8 +1079,8 @@ public static class PglWin {
     # ---------------- 无边框窗口控制 ----------------
     $drag = {
         param($sender, $e)
-        if ($e.Button -eq [Windows.Forms.MouseButtons]::Left -and ('PglWin' -as [type])) {
-            [PglWin]::DragMove($script:MainForm.Handle)
+        if ($e.Button -eq [Windows.Forms.MouseButtons]::Left) {
+            try { [PglDrag]::DragMove($script:MainForm.Handle) } catch { }
         }
     }
     $form.Add_MouseDown($drag)
@@ -1299,7 +1313,7 @@ public static class PglWin {
     $bar.Controls.Add($logLink)
 
     $ver = New-Object Windows.Forms.Label
-    $ver.Text = 'v0.18'
+    $ver.Text = 'v0.18.1'
     $ver.AutoSize = $true
     $ver.BackColor = [Drawing.Color]::Transparent
     $ver.Location = New-Object Drawing.Point(($cw - (UiPx 64)), (UiPx 7))
